@@ -13,7 +13,7 @@ class Book{
 
     borrow():boolean{
         if(this.avaialable){
-            this.avaialable = false;
+            this.avaialable = true;
             console.log(`${this.title} has been borrowed.`);
             return true;
         }else{
@@ -32,14 +32,16 @@ class Book{
 }
 
 const book = new Book("Make hay", "Chimamanda", 1123)
+const book2 = new Book("Ade the Drummer Boy", "Beu", 1149);
 book.borrow();
 console.log(book)
+console.log(book2)
 
 class Member {
     name: string;
     borrowedBook : Book[];
     
-    constructor(name:string, borrowedBook:[]){
+    constructor(name:string){
         this.name = name;
         this.borrowedBook = [];
     }
@@ -63,4 +65,39 @@ class Member {
        )
     }
 }
-//const memberBook = new Member('Ade the drummer boy','Beu', 1149)
+const member1 = new Member("Ope");
+member1.borrowBook(book);
+member1.borrowBook(book);
+
+member1.listBorrowedBooks()
+
+class Library{
+    books : Book[];
+    members: Member[];
+
+    constructor(){
+        this.books = [];
+        this.members = [];
+    }
+    
+    addBooks(book:Book){
+      this.books.push(book)
+    }
+
+    registerMembers(member:Member){
+      this.members.push(member)
+    }
+
+    listAvailableBooks(): void{
+        this.books
+        .filter(book => book.avaialable)
+        .forEach(availableBooks => 
+            console.log(`These are the available books ${availableBooks}`)
+        )  
+    }
+}
+const library1 = new Library()
+console.log(library1)
+library1.addBooks(book2)
+library1.registerMembers(member1);
+library1.listAvailableBooks()
